@@ -77,4 +77,29 @@ public class UndoAndRedo {
         }
         return  json;
     }
+
+    public static HashMap<Long,String[]> redo(){
+        int len = redo_hashmap.keySet().size();
+        if(!redo_hashmap.isEmpty()){
+            Long[] key_arr = redo_hashmap.keySet().toArray(new Long[0]);
+            undo_hashmap.put(key_arr[0],redo_hashmap.get(key_arr[0]));
+            redo_hashmap.remove(key_arr[0]);
+        }
+        return undo_hashmap;
+    }
+
+    //functions to clearout the hashmaps
+    public static void clearUndo(){
+        undo_hashmap.clear();
+    }
+
+    public static void clearRedo(){
+        redo_hashmap.clear();
+    }
+    public HashMap<Long,String[]>getUndo(){
+        return undo_hashmap;
+    }
+    public void setUndo(HashMap<Long,String[] >un){
+        this.undo_hashmap = un;
+    }
 }
